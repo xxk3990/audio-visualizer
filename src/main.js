@@ -89,7 +89,7 @@ function loop() {
     /* 
     current time code below from https://mikeheavers.com/tutorials/format_html5_current_time_property/
     except I ended up not needing to do "parseInt((audio.currentTime / 60) % 60);" which is the equation 
-    they use for minutes, and only had to do / 60. 
+    they use for minutes, and only had to do currentTime / 60. 
     */
     let curSec = parseInt(audio.element.currentTime % 60);
     let curMin = parseInt(audio.element.currentTime / 60);
