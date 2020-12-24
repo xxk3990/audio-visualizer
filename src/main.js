@@ -261,7 +261,7 @@ function setupUI(canvasElement) {
                 uploadSrc = URL.createObjectURL(files[0]);
                 audio.element.src = uploadSrc;
                 uploaded = true;
-            } catch { //if they don't pick one (hit cancel), stop playing
+            } catch { //if they don't pick one (aka hit cancel), stop playing
                 audio.pauseCurrentSound();
                 playButton.dataset.playing = "no";
             }
