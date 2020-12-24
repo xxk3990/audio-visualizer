@@ -31,8 +31,7 @@ function setupCanvas(canvasElement, analyserNodeRef, freqRadio, waveRadio, curve
     topTriButton = triTopColorButton;
     bottomTriButton = triBottomColorButton;
     bothTriangleColors = bothTriColors;
-    //changed gradient to use the same random gradient function I created in my project 1
-    gradient = utils.getRandomGradient(ctx, canvasWidth, canvasHeight);
+    gradient = utils.getRandomGradient(ctx, canvasWidth, canvasHeight); //set gradient to random gradient
     topTriColor = utils.getRandomColor(); //set color of top triangle
     bottomTriColor = utils.getRandomColor(); //set color of bottom triangle
     // keep a reference to the analyser node
@@ -47,13 +46,13 @@ function setupCanvas(canvasElement, analyserNodeRef, freqRadio, waveRadio, curve
         displays.showWave = false;
         displays.showFreq = true; //switch back to frequency
     }
-    topTriButton.onclick = () => {
+    topTriButton.onclick = () => { //change top triangle color only
         topTriColor = utils.getRandomColor();
     }
-    bottomTriButton.onclick = () => {
+    bottomTriButton.onclick = () => { //change bottom triangle color only
         bottomTriColor = utils.getRandomColor();
     }
-    bothTriangleColors.onclick = () => {
+    bothTriangleColors.onclick = () => { //change both
         topTriColor = utils.getRandomColor();
         bottomTriColor = utils.getRandomColor();
     }
