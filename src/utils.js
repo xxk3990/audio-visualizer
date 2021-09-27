@@ -40,7 +40,7 @@ const getRandomGradient = (ctx, canvasWidth, canvasHeight) => {
    grade.addColorStop(.5, midColor);
    grade.addColorStop(.75, stop3);
    grade.addColorStop(1, endColor);
-    return grade;
+   return grade;
 };
 
 

@@ -10,7 +10,8 @@
 import * as utils from './utils.js';
 
 let ctx, canvasWidth, canvasHeight, gradient, analyserNode, audioData,
-    freqRad, waveRad, topTriColor, bottomTriColor, curveHueSlider, curveHueLabel, topTriButton, bottomTriButton, bothTriangleColors;
+    freqRad, waveRad, topTriColor, bottomTriColor, curveHueSlider, curveHueLabel, topTriButton, bottomTriButton, bothTriangleColors, bgColor, curveColor,
+    randGradeRad, audioCurveColorRad, oneCurveColorRad, oneColorBgBtn, randGradeBgBtn;
 
 const displays = { //display options
     showFreq: true,
@@ -18,7 +19,8 @@ const displays = { //display options
 }
 
 
-function setupCanvas(canvasElement, analyserNodeRef, freqRadio, waveRadio, curveSlider, curveLabel, triTopColorButton, triBottomColorButton, bothTriColors) {
+function setupCanvas(canvasElement, analyserNodeRef, freqRadio, waveRadio, curveSlider, curveLabel, triTopColorButton, triBottomColorButton, bothTriColors, bgbtn,
+    randGradeRadio, audioCurveColorRadio, oneCurveColorRadio, randGradeBG, singleBGColorBtn) {
     // create drawing context
     ctx = canvasElement.getContext("2d");
     canvasWidth = canvasElement.width;
@@ -31,10 +33,18 @@ function setupCanvas(canvasElement, analyserNodeRef, freqRadio, waveRadio, curve
     topTriButton = triTopColorButton;
     bottomTriButton = triBottomColorButton;
     bothTriangleColors = bothTriColors;
+    //bgBtn = bgbtn;
+    randGradeRad = randGradeRadio;
+    audioCurveColorRad = audioCurveColorRadio;
+    oneCurveColorRad = oneCurveColorRadio; 
+    oneColorBgBtn = singleBGColorBtn;
+    randGradeBgBtn = randGradeBG;
+
     //changed gradient to use the same random gradient function I created in my project 1
     gradient = utils.getRandomGradient(ctx, canvasWidth, canvasHeight);
     topTriColor = utils.getRandomColor(); //set color of top triangle
     bottomTriColor = utils.getRandomColor(); //set color of bottom triangle
+    curveColor = utils.getRandomGradient(ctx, canvasWidth, canvasHeight);
     // keep a reference to the analyser node
     analyserNode = analyserNodeRef;
     // this is the array where the analyser data will be stored
@@ -57,6 +67,24 @@ function setupCanvas(canvasElement, analyserNodeRef, freqRadio, waveRadio, curve
         topTriColor = utils.getRandomColor();
         bottomTriColor = utils.getRandomColor();
     }
+    oneColorBgBtn.onclick = () => {
+        bgColor = utils.getRandomColor();
+    }
+    randGradeBgBtn.onclick = () => {
+        bgColor = utils.getRandomGradient(ctx, canvasWidth, canvasHeight);
+    }
+    randGradeRad.onchange = () => {
+        curveColor = utils.getRandomGradient(ctx, canvasWidth, canvasHeight);
+    }
+    oneCurveColorRad.onchange = () => {
+        curveColor = utils.getRandomColor();
+    }
+    // audioCurveColorRad.onchange = () => {
+    //     for(let i = 0; i < audioData.length; i++) {
+    //         curveColor = `hsl(${audioData[i] * curveHueSlider.value},100%, 50%)`;
+    //         console.log(curveColor);
+    //     }
+    // }
 
 }
 
@@ -79,7 +107,7 @@ function draw(params = {}) {
 
     // 2 - draw background
     ctx.save();
-    ctx.fillStyle = "black";
+    ctx.fillStyle = bgColor;
     ctx.fillRect(0, 0, canvasWidth, canvasHeight);
     ctx.restore();
 
@@ -153,8 +181,12 @@ function draw(params = {}) {
         for (let i = 0; i < audioData.length; i++) {
             ctx.save();
             //change stroke color based on audio and have the hue multiplier change based on the bezier slider value
-            ctx.strokeStyle = `hsl(${audioData[i] * curveHueSlider.value},100%, 50%)`;
-            curveHueLabel.innerHTML = "Audio data * " + curveHueSlider.value;
+            if(audioCurveColorRad.checked) {
+                ctx.strokeStyle = `hsl(${audioData[i] * curveHueSlider.value},100%, 50%)`;
+            } else {
+                ctx.strokeStyle = curveColor;
+            }
+            curveHueLabel.textContent = "Audio data * " + curveHueSlider.value;
             ctx.scale(.2, .2); //rotate the curve
             ctx.rotate(rotate);
             ctx.lineWidth = 10;

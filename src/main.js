@@ -42,12 +42,21 @@ let triTopColorButton = document.querySelector("#topColor");
 let triBottomColorButton = document.querySelector("#bottomColor");
 let bothTriColorsButton = document.querySelector("#bothColors");
 let triColorTitle = document.querySelector("#triangleColorTitle");
-
+let bgbtn = document.querySelector("#background-btn");
+let randCurveGrade = document.querySelector("#rand-gradient");
+let oneCurveColor = document.querySelector("#one-curve-color");
+let audioCurveColor = document.querySelector("#normal-mode")
+let audioCurveLabel = document.querySelector("#normal-mode-label");
+let randGradeCurveLabel = document.querySelector("#rand-grade-label");
+let oneCurveColorLabel = document.querySelector("#one-curve-color-label");
+let bgColorRandGrade = document.querySelector("#background-btn-rand-grade");
+let bgColorSingleColor = document.querySelector("#background-btn-one-color");
 
 function init() {
     audio.setupWebaudio(DEFAULTS.sound1);
     let canvasElement = document.querySelector("canvas"); // hookup <canvas> element
-    canvas.setupCanvas(canvasElement, audio.analyserNode, freqRadio, waveRadio, curveHueSlider, curveHueLabel, triTopColorButton, triBottomColorButton, bothTriColorsButton);
+    canvas.setupCanvas(canvasElement, audio.analyserNode, freqRadio, waveRadio, curveHueSlider, curveHueLabel, triTopColorButton, triBottomColorButton, bothTriColorsButton, bgbtn,
+        randCurveGrade, audioCurveColor, oneCurveColor, bgColorRandGrade, bgColorSingleColor);
     setupUI(canvasElement);
     progSlider.value = audio.element.currentTime / audio.element.duration;
     progSlider.oninput = () => { //allow user to change point in song
@@ -139,11 +148,36 @@ function loop() {
         curveHueLabel.style.opacity = "0.5";
         curveHueTitle.style.opacity = "0.5";
         curveHueSlider.style.cursor = "default"; //remove click cursor to avoid confusion
+        randCurveGrade.setAttribute("disabled", true);
+        audioCurveColor.setAttribute('disabled', true);
+        oneCurveColor.setAttribute('disabled', true);
+        randGradeCurveLabel.style.opacity = '0.5';
+        audioCurveLabel.style.opacity = '0.5';
+        oneCurveColorLabel.style.opacity = '0.5';
+
     } else {
-        curveHueSlider.removeAttribute("disabled"); //restore if checked
-        curveHueLabel.style.opacity = "1";
-        curveHueTitle.style.opacity = "1";
-        curveHueSlider.style.cursor = "pointer";
+        if (audioCurveColor.checked) {
+            curveHueSlider.removeAttribute("disabled"); //disable hue multiplier slider if bezier cb is unchecked and audio curve color is unchecked
+            //set text on either side of slider to 0.5 opacity, will happen by default for slider when disabled
+            curveHueLabel.style.opacity = "1.0";
+            curveHueTitle.style.opacity = "1.0";
+            curveHueSlider.style.cursor = "pointer";
+        } else {
+            curveHueSlider.setAttribute("disabled", true); //disable hue multiplier slider if bezier cb is unchecked
+            //set text on either side of slider to 0.5 opacity, will happen by default for slider when disabled
+            curveHueLabel.style.opacity = "0.5";
+            curveHueTitle.style.opacity = "0.5";
+            curveHueSlider.style.cursor = "default"; //remove click cursor to avoid confusion
+        }
+        randCurveGrade.removeAttribute("disabled");
+        audioCurveColor.removeAttribute('disabled');
+        oneCurveColor.removeAttribute('disabled');
+        randGradeCurveLabel.removeAttribute('disabled');
+        audioCurveLabel.removeAttribute('disabled');
+        oneCurveColorLabel.removeAttribute('disabled');
+        randGradeCurveLabel.style.opacity = '1';
+        audioCurveLabel.style.opacity = '1';
+        oneCurveColorLabel.style.opacity = '1';
     }
     if (triCheck.checked == false) {
         triTopColorButton.setAttribute("disabled", true); //disable tri color buttons if tri cb is unchecked
