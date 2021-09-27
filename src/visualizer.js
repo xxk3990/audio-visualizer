@@ -10,8 +10,9 @@
 import * as utils from './utils.js';
 
 let ctx, canvasWidth, canvasHeight, gradient, analyserNode, audioData,
-    freqRad, waveRad, topTriColor, bottomTriColor, curveHueSlider, curveHueLabel, topTriButton, bottomTriButton, bothTriangleColors, bgColor, curveColor,
-    randGradeRad, audioCurveColorRad, oneCurveColorRad, oneColorBgBtn, randGradeBgBtn;
+    freqRad, waveRad, topTriColor, bottomTriColor, curveHueSlider, curveHueLabel, topTriButton, bottomTriButton, bothTriangleColors,
+    //below added September 2021. Adds functionality for changing curve color and background color
+    bgColor, curveColor, randGradeRad, audioCurveColorRad, oneCurveColorRad, oneColorBgBtn, randGradeBgBtn;
 
 const displays = { //display options
     showFreq: true,
@@ -34,9 +35,10 @@ function setupCanvas(canvasElement, analyserNodeRef, freqRadio, waveRadio, curve
     bottomTriButton = triBottomColorButton;
     bothTriangleColors = bothTriColors;
     //bgBtn = bgbtn;
+    //below added September 2021. Adds functionality for changing curve color and background color
     randGradeRad = randGradeRadio;
     audioCurveColorRad = audioCurveColorRadio;
-    oneCurveColorRad = oneCurveColorRadio; 
+    oneCurveColorRad = oneCurveColorRadio;
     oneColorBgBtn = singleBGColorBtn;
     randGradeBgBtn = randGradeBG;
 
@@ -67,6 +69,7 @@ function setupCanvas(canvasElement, analyserNodeRef, freqRadio, waveRadio, curve
         topTriColor = utils.getRandomColor();
         bottomTriColor = utils.getRandomColor();
     }
+    //below added September 2021. Adds functionality for changing curve color and background color
     oneColorBgBtn.onclick = () => {
         bgColor = utils.getRandomColor();
     }
@@ -79,12 +82,6 @@ function setupCanvas(canvasElement, analyserNodeRef, freqRadio, waveRadio, curve
     oneCurveColorRad.onchange = () => {
         curveColor = utils.getRandomColor();
     }
-    // audioCurveColorRad.onchange = () => {
-    //     for(let i = 0; i < audioData.length; i++) {
-    //         curveColor = `hsl(${audioData[i] * curveHueSlider.value},100%, 50%)`;
-    //         console.log(curveColor);
-    //     }
-    // }
 
 }
 
@@ -172,18 +169,20 @@ function draw(params = {}) {
     if (params.showCurves) {
         ctx.save();
         ctx.translate(halfWidth, halfHeight); //move to half the canvas width, half the canvas height
-        if(displays.showFreq) {
+        if (displays.showFreq) {
             ctx.globalAlpha = 1.0;
-        }
-        else {
+        } else {
             ctx.globalAlpha = 0.5; //less flashiness in waveform mode
         }
         for (let i = 0; i < audioData.length; i++) {
             ctx.save();
             //change stroke color based on audio and have the hue multiplier change based on the bezier slider value
-            if(audioCurveColorRad.checked) {
+            if (audioCurveColorRad.checked) {
+                //below added September 2021. Adds functionality for changing curve color.
+                //if the change color based on audio radio button is selected, change color of curve using below statement
                 ctx.strokeStyle = `hsl(${audioData[i] * curveHueSlider.value},100%, 50%)`;
             } else {
+                //otherwise set it equal to curve color variable
                 ctx.strokeStyle = curveColor;
             }
             curveHueLabel.textContent = "Audio data * " + curveHueSlider.value;

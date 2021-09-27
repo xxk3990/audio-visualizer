@@ -90,7 +90,7 @@ input[type="range"] {
     grid-column: 1/span 1;
     grid-row: 1/span 1;
     background-color: darkgray;
-    height: 375px;
+    height: 395px;
     margin-right: 10px;
     max-width: 400px;
 }
@@ -140,7 +140,7 @@ input[type="range"] {
     display: flex;
     flex-direction: column;
     align-items: center;
-    height: 375px;
+    height: 395px;
     margin-bottom: 0;
     background-color: darkgray;
     max-width: 400px;
@@ -229,7 +229,8 @@ input[type="range"] {
     margin-top: 10px;
 }
 
-#button-choices {
+#button-choices,
+#bg-btn-choices {
     display: flex;
     justify-content: center;
 }
@@ -246,6 +247,12 @@ input[type="range"] {
 .tri-color-btn {
     /* the three triangle buttons */
     width: 5rem;
+    height: 30px;
+    font-size: 1.2rem;
+    cursor: pointer;
+}
+.bg-color-btn {
+    width: 10rem;
     height: 30px;
     font-size: 1.2rem;
     cursor: pointer;
@@ -271,4 +278,10 @@ input[type="range"] {
     flex-direction: column;
     align-items: center;
     margin-top: 5px;
+}
+#background-btn-one-color {
+    margin-left: 5px;
+}
+#background-btn-rand-grade {
+    margin-right: 5px;
 }

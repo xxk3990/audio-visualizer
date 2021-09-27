@@ -38,6 +38,7 @@ let triTopColorButton = document.querySelector("#topColor");
 let triBottomColorButton = document.querySelector("#bottomColor");
 let bothTriColorsButton = document.querySelector("#bothColors");
 let triColorTitle = document.querySelector("#triangleColorTitle");
+//below added in September 2021. Adds new color features and additional stuff.
 let bgbtn = document.querySelector("#background-btn");
 let randCurveGrade = document.querySelector("#rand-gradient");
 let oneCurveColor = document.querySelector("#one-curve-color");
@@ -144,6 +145,7 @@ function loop() {
         curveHueLabel.style.opacity = "0.5";
         curveHueTitle.style.opacity = "0.5";
         curveHueSlider.style.cursor = "default"; //remove click cursor to avoid confusion
+        //below added September 2021. Adds functionality for enabling/disabling new curve color radio buttons
         randCurveGrade.setAttribute("disabled", true);
         audioCurveColor.setAttribute('disabled', true);
         oneCurveColor.setAttribute('disabled', true);
@@ -153,6 +155,7 @@ function loop() {
 
     } else {
         if (audioCurveColor.checked) {
+            //below added September 2021. Adds functionality for enabling/disabling new curve color radio buttons and curve hue slider
             curveHueSlider.removeAttribute("disabled"); //disable hue multiplier slider if bezier cb is unchecked and audio curve color is unchecked
             //set text on either side of slider to 0.5 opacity, will happen by default for slider when disabled
             curveHueLabel.style.opacity = "1.0";
@@ -165,6 +168,7 @@ function loop() {
             curveHueTitle.style.opacity = "0.5";
             curveHueSlider.style.cursor = "default"; //remove click cursor to avoid confusion
         }
+        //below added September 2021. Adds functionality for enabling/disabling new curve color radio buttons
         randCurveGrade.removeAttribute("disabled");
         audioCurveColor.removeAttribute('disabled');
         oneCurveColor.removeAttribute('disabled');

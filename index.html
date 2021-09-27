@@ -15,7 +15,7 @@
         <h1>AUDIO VISUALIZER!</h1>
     </header>
     <main>
-        <canvas width="1100" height="750"></canvas>
+        <canvas width="1100" height="760"></canvas>
         <div id="controls">
             <section id="audio-section">
                 <div class="ctrl-title">
@@ -75,7 +75,7 @@
                 <section id="shape-controls">
                     <!-- additional shape controls -->
                     <section id="curve-hue-section">
-                        <h4 id="curveColorTitle">Change Curve Colors!</h4>
+                        <h4 id="curveColorTitle">Change Curve Color!</h4>
                         <span id="curve-color-radios">
                             <input type="radio" name="curve-colors" id="rand-gradient" checked class="curve-colors"
                                 title="note: switching between these will reset the color values"><label
@@ -106,8 +106,13 @@
                         </span>
                     </section>
                     <section id="change-background">
-                        <button id="background-btn-rand-grade">Change background color to random gradient</button>
-                        <button id="background-btn-one-color">Change background color to new color </button>
+                        <h4 id="triangleColorTitle">Change Background Color!</h4>
+                        <span id="bg-btn-choices">
+                            <button id="background-btn-rand-grade" class="bg-color-btn"
+                                title="Change background to a random gradient!">Gradient</button>
+                            <button id="background-btn-one-color" class="bg-color-btn"
+                                title="Change background to a single color!">One Color </button>
+                        </span>
                     </section>
                 </section>
             </section>

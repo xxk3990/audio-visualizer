@@ -21,20 +21,20 @@ const getLinearGradient = (ctx, startX, startY, endX, endY, colorStops) => {
 };
 
 const getRandomGradient = (ctx, canvasWidth, canvasHeight) => {
-   //Get random gradient function
-   let startColor = getRandomColor(); //start color
-   let stop1 = getRandomColor(); //25%
-   let midColor = getRandomColor(); //halfway point
-   let stop3 = getRandomColor(); //75%
-   let endColor = getRandomColor(); //end color
+    //Get random gradient function
+    let startColor = getRandomColor(); //start color
+    let stop1 = getRandomColor(); //25%
+    let midColor = getRandomColor(); //halfway point
+    let stop3 = getRandomColor(); //75%
+    let endColor = getRandomColor(); //end color
 
-   let grade = ctx.createLinearGradient(0, 0, canvasWidth, canvasHeight);
-   grade.addColorStop(0, startColor);
-   grade.addColorStop(0.25, stop1);
-   grade.addColorStop(.5, midColor);
-   grade.addColorStop(.75, stop3);
-   grade.addColorStop(1, endColor);
-   return grade;
+    let grade = ctx.createLinearGradient(0, 0, canvasWidth, canvasHeight);
+    grade.addColorStop(0, startColor);
+    grade.addColorStop(0.25, stop1);
+    grade.addColorStop(.5, midColor);
+    grade.addColorStop(.75, stop3);
+    grade.addColorStop(1, endColor);
+    return grade;
 };
 
 
