@@ -3,10 +3,6 @@
 	and setting up the main event loop
 */
 
-// We will write the functions in this file in the traditional ES5 way
-// In this instance, we feel the code is more readable if written this way
-// If you want to re-write these as ES6 arrow functions, to be consistent with the other files, go ahead!
-
 import * as utils from './utils.js';
 import * as audio from './audio.js';
 import * as canvas from './visualizer.js'; //canvas visualizer
@@ -102,7 +98,7 @@ function loop() {
     /* 
     current time code below from https://mikeheavers.com/tutorials/format_html5_current_time_property/
     except I ended up not needing to do "parseInt((audio.currentTime / 60) % 60);" which is the equation 
-    they use for minutes, and only had to do / 60. 
+    they use for minutes, and only had to do currentTime / 60. 
     */
     let curSec = parseInt(audio.element.currentTime % 60);
     let curMin = parseInt(audio.element.currentTime / 60);
@@ -299,7 +295,7 @@ function setupUI(canvasElement) {
                 uploadSrc = URL.createObjectURL(files[0]);
                 audio.element.src = uploadSrc;
                 uploaded = true;
-            } catch { //if they don't (hit cancel), stop playing
+            } catch { //if they don't pick one (aka hit cancel), stop playing
                 audio.pauseCurrentSound();
                 playButton.dataset.playing = "no";
             }

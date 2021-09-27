@@ -57,13 +57,13 @@ function setupCanvas(canvasElement, analyserNodeRef, freqRadio, waveRadio, curve
         displays.showWave = false;
         displays.showFreq = true; //switch back to frequency
     }
-    topTriButton.onclick = () => {
+    topTriButton.onclick = () => { //change top triangle color only
         topTriColor = utils.getRandomColor();
     }
-    bottomTriButton.onclick = () => {
+    bottomTriButton.onclick = () => { //change bottom triangle color only
         bottomTriColor = utils.getRandomColor();
     }
-    bothTriangleColors.onclick = () => {
+    bothTriangleColors.onclick = () => { //change both
         topTriColor = utils.getRandomColor();
         bottomTriColor = utils.getRandomColor();
     }
